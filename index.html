@@ -1,0 +1,643 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Pulse Tribe — Ignite Your Potential</title>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Barlow:wght@400;500;600;700&family=Barlow+Condensed:wght@600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+<!-- ===== ONBOARDING ===== -->
+<div id="onboarding">
+  <div class="logo-mark">🔥 PULSE TRIBE</div>
+  <div class="logo-sub">Ignite Your Potential</div>
+
+  <div class="ob-card">
+    <!-- Step indicator -->
+    <div class="steps">
+      <div class="step-item">
+        <div class="step-circle active" id="sc1">1</div>
+        <div class="step-label active" id="sl1">Body Profile</div>
+      </div>
+      <div class="step-line" id="line1"></div>
+      <div class="step-item">
+        <div class="step-circle" id="sc2">2</div>
+        <div class="step-label" id="sl2">Medical</div>
+      </div>
+      <div class="step-line" id="line2"></div>
+      <div class="step-item">
+        <div class="step-circle" id="sc3">3</div>
+        <div class="step-label" id="sl3">Injuries</div>
+      </div>
+      <div class="step-line" id="line3"></div>
+      <div class="step-item">
+        <div class="step-circle" id="sc4">4</div>
+        <div class="step-label" id="sl4">Nutrition</div>
+      </div>
+      <div class="step-line" id="line4"></div>
+      <div class="step-item">
+        <div class="step-circle" id="sc5">5</div>
+        <div class="step-label" id="sl5">Activate</div>
+      </div>
+    </div>
+
+    <!-- STEP 1: Body Profile -->
+    <div id="step1">
+      <h2>Body & Basic Profile</h2>
+      <p class="sub">Let's start with your basic measurements</p>
+      <div class="field">
+        <label><span class="ico">⚖️</span> Weight (kg)</label>
+        <input type="number" id="weight" placeholder="70" value="70">
+      </div>
+      <div class="field">
+        <label><span class="ico">📏</span> Height (cm)</label>
+        <input type="number" id="height" placeholder="175" value="175">
+      </div>
+      <div class="field">
+        <label><span class="ico">🗓</span> Age</label>
+        <input type="number" id="age" placeholder="25" value="25">
+      </div>
+      <div class="field">
+        <label><span class="ico">👤</span> Gender</label>
+        <div class="gender-grid">
+          <button class="gender-btn selected" onclick="selectGender(this,'Male')">Male</button>
+          <button class="gender-btn" onclick="selectGender(this,'Female')">Female</button>
+          <button class="gender-btn" onclick="selectGender(this,'Non-binary')">Non-binary</button>
+          <button class="gender-btn" onclick="selectGender(this,'Prefer not to say')">Prefer not to say</button>
+          <button class="gender-btn" onclick="selectGender(this,'Other')">Other</button>
+        </div>
+      </div>
+      <button class="btn-primary" onclick="nextStep(2)">Continue →</button>
+    </div>
+
+    <!-- STEP 2: Medical Conditions -->
+    <div id="step2" style="display:none">
+      <h2>Medical Conditions</h2>
+      <p class="sub">Select any conditions that apply to you for safer workouts</p>
+      <div class="cond-section">
+        <div class="tag-group">
+          <button class="tag none-tag selected" onclick="toggleTag(this)">✕ None (No medical conditions)</button>
+        </div>
+      </div>
+      <div class="cond-section">
+        <h4>🫀 Cardiovascular</h4>
+        <div class="tag-group">
+          <button class="tag" onclick="toggleTag(this)">High blood pressure</button>
+          <button class="tag" onclick="toggleTag(this)">Heart disease</button>
+          <button class="tag" onclick="toggleTag(this)">Heart surgery history</button>
+          <button class="tag" onclick="toggleTag(this)">High cholesterol</button>
+        </div>
+      </div>
+      <div class="cond-section">
+        <h4>⚡ Metabolic & Endocrine</h4>
+        <div class="tag-group">
+          <button class="tag" onclick="toggleTag(this)">Diabetes (Type 1)</button>
+          <button class="tag" onclick="toggleTag(this)">Diabetes (Type 2)</button>
+          <button class="tag" onclick="toggleTag(this)">Obesity-related</button>
+          <button class="tag" onclick="toggleTag(this)">Prediabetes</button>
+          <button class="tag" onclick="toggleTag(this)">Thyroid disorder</button>
+        </div>
+      </div>
+      <div class="cond-section">
+        <h4>🦴 Musculoskeletal</h4>
+        <div class="tag-group">
+          <button class="tag" onclick="toggleTag(this)">Arthritis</button>
+          <button class="tag" onclick="toggleTag(this)">Osteoporosis</button>
+          <button class="tag" onclick="toggleTag(this)">Chronic back pain</button>
+          <button class="tag" onclick="toggleTag(this)">Joint issues</button>
+        </div>
+      </div>
+      <div class="btn-row">
+        <button class="btn-secondary" onclick="nextStep(1)">← Back</button>
+        <button class="btn-primary" style="flex:2" onclick="nextStep(3)">Continue →</button>
+      </div>
+    </div>
+
+    <!-- STEP 3: Injuries -->
+    <div id="step3" style="display:none">
+      <h2>Injury History</h2>
+      <p class="sub">Have you had any past or ongoing injuries?</p>
+      <div class="injury-state good" id="injState" onclick="toggleInjury()">
+        <div class="inj-icon">✅</div>
+        <div class="inj-title" style="color:var(--green)">Great! No injuries to report.</div>
+        <div class="inj-change">Change my answer</div>
+      </div>
+      <div id="injTags" style="display:none; margin-bottom:18px;">
+        <div class="tag-group" style="margin-bottom:10px;">
+          <button class="tag" onclick="toggleTag(this)">Shoulder</button>
+          <button class="tag" onclick="toggleTag(this)">Knee</button>
+          <button class="tag" onclick="toggleTag(this)">Lower back</button>
+          <button class="tag" onclick="toggleTag(this)">Ankle</button>
+          <button class="tag" onclick="toggleTag(this)">Hip</button>
+          <button class="tag" onclick="toggleTag(this)">Wrist</button>
+          <button class="tag" onclick="toggleTag(this)">Neck</button>
+          <button class="tag" onclick="toggleTag(this)">Elbow</button>
+        </div>
+      </div>
+      <div class="btn-row">
+        <button class="btn-secondary" onclick="nextStep(2)">← Back</button>
+        <button class="btn-primary" style="flex:2" onclick="nextStep(4)">Continue →</button>
+      </div>
+    </div>
+
+    <!-- STEP 4: Nutrition Goal -->
+    <div id="step4" style="display:none">
+      <h2>Nutrition & Goals</h2>
+      <p class="sub">What's your primary fitness goal?</p>
+      <div class="goal-cards">
+        <div class="goal-card selected" onclick="selectGoal(this)">
+          <span class="ico">💪</span>
+          <div class="info"><h4>Build Muscle</h4><p>Gain strength and increase muscle mass</p></div>
+        </div>
+        <div class="goal-card" onclick="selectGoal(this)">
+          <span class="ico">🔥</span>
+          <div class="info"><h4>Lose Weight</h4><p>Burn fat and reduce body weight</p></div>
+        </div>
+        <div class="goal-card" onclick="selectGoal(this)">
+          <span class="ico">⚡</span>
+          <div class="info"><h4>Improve Endurance</h4><p>Build cardio and stamina</p></div>
+        </div>
+        <div class="goal-card" onclick="selectGoal(this)">
+          <span class="ico">🧘</span>
+          <div class="info"><h4>General Fitness</h4><p>Stay healthy and active</p></div>
+        </div>
+      </div>
+      <div class="btn-row">
+        <button class="btn-secondary" onclick="nextStep(3)">← Back</button>
+        <button class="btn-primary" style="flex:2" onclick="nextStep(5)">Continue →</button>
+      </div>
+    </div>
+
+    <!-- STEP 5: Activate -->
+    <div id="step5" style="display:none; text-align:center;">
+      <div style="font-size:3.5rem; margin-bottom:16px;">🔥</div>
+      <h2 style="font-size:1.5rem; margin-bottom:8px;">You're All Set!</h2>
+      <p class="sub">Your AI-powered fitness journey begins now. Welcome to the Tribe.</p>
+      <div style="background:rgba(232,83,10,0.1); border:1px solid rgba(232,83,10,0.2); border-radius:12px; padding:18px; margin:20px 0; text-align:left;">
+        <div style="font-size:.78rem; color:var(--orange); font-weight:700; margin-bottom:10px;">YOUR PROFILE SUMMARY</div>
+        <div id="profileSummary" style="font-size:.85rem; color:var(--muted); line-height:2;"></div>
+      </div>
+      <button class="btn-primary" onclick="launchApp()">🚀 Launch Pulse Tribe</button>
+    </div>
+  </div>
+</div>
+
+<!-- ===== MAIN APP ===== -->
+<div id="app">
+
+  <!-- Top Navigation -->
+  <div class="top-nav">
+    <div class="top-nav-pill">
+      <button class="nav-btn active" id="nb-home" onclick="navTo('home',this)" title="Home">🏠</button>
+      <button class="nav-btn" id="nb-feed" onclick="navTo('feed',this)" title="Feed">🔥</button>
+      <button class="nav-btn" id="nb-community" onclick="navTo('community',this)" title="Community">👥</button>
+      <button class="nav-btn" id="nb-chat" onclick="navTo('chat',this)" title="Messages">💬</button>
+      <button class="nav-btn" id="nb-notif" onclick="navTo('notif',this)" title="Notifications">🔔</button>
+      <button class="nav-btn" id="nb-profile" onclick="navTo('profile',this)" title="Profile">↪</button>
+    </div>
+  </div>
+
+  <!-- Sidebar -->
+  <div class="sidebar">
+    <button class="sb-btn active" id="sb-workouts" onclick="switchPage('workouts','sb-workouts')" title="Workouts">💪</button>
+    <button class="sb-btn" id="sb-schedule" onclick="switchPage('schedule','sb-schedule')" title="Schedule">📅</button>
+    <button class="sb-btn" id="sb-nutrition" onclick="switchPage('nutrition','sb-nutrition')" title="Nutrition">🥗</button>
+    <button class="sb-btn" id="sb-ai" onclick="switchPage('ai','sb-ai')" title="AI Assist">✨</button>
+    <button class="sb-btn" id="sb-shop" onclick="switchPage('shop','sb-shop')" title="Shop">🛒</button>
+    <button class="sb-btn" id="sb-userprofile" onclick="switchPage('userprofile','sb-userprofile')" title="My Profile">👤</button>
+  </div>
+
+  <!-- Main Content -->
+  <div class="main">
+
+    <!-- WORKOUTS PAGE -->
+    <div class="page active" id="page-workouts">
+      <div class="page-header">
+        <h1>💪 My Workouts</h1>
+        <div class="header-actions">
+          <button class="badge-btn orange">✨ AI Workout</button>
+          <button class="badge-btn outline">⏱ History</button>
+        </div>
+      </div>
+      <div class="stats-row">
+        <div class="stat-card">
+          <div class="label">🎯 Consistency</div>
+          <div class="value">0%</div>
+          <div class="hint">0/7 days</div>
+        </div>
+        <div class="stat-card">
+          <div class="label">📈 Progress</div>
+          <div class="value" style="font-size:1.2rem; color:var(--muted);">—</div>
+          <div class="hint">start your journey</div>
+        </div>
+        <div class="stat-card">
+          <div class="label">🔥 Current Streak</div>
+          <div class="streak">0 <span style="font-size:1rem">days</span></div>
+        </div>
+      </div>
+      <div class="ai-insight">
+        <div class="ico">💡</div>
+        <div>
+          <h4>AI Insight</h4>
+          <p>Let's get started! Log your first workout today to begin building your streak.</p>
+        </div>
+      </div>
+      <div class="empty-state">
+        <div class="ico">💪</div>
+        <h3>No Workout Plans Yet</h3>
+        <p>Your trainer hasn't approved any workout plans for you yet. Once they do, they'll appear here!</p>
+      </div>
+      <div class="section-title">🎬 Workout Videos</div>
+      <div class="workout-grid">
+        <div class="workout-card">
+          <div class="workout-thumb">🏋️</div>
+          <div class="workout-info"><h4>Barbell Situp</h4><p>Core · Intermediate</p></div>
+        </div>
+        <div class="workout-card">
+          <div class="workout-thumb">🦵</div>
+          <div class="workout-info"><h4>Dumbell Squat</h4><p>Legs · Beginner</p></div>
+        </div>
+        <div class="workout-card">
+          <div class="workout-thumb">💪</div>
+          <div class="workout-info"><h4>Push Ups</h4><p>Chest · Beginner</p></div>
+        </div>
+        <div class="workout-card">
+          <div class="workout-thumb">🤸</div>
+          <div class="workout-info"><h4>Chest and Arm</h4><p>Upper body · Advanced</p></div>
+        </div>
+        <div class="workout-card">
+          <div class="workout-thumb">🏃</div>
+          <div class="workout-info"><h4>Cardio Blast</h4><p>Cardio · All levels</p></div>
+        </div>
+        <div class="workout-card">
+          <div class="workout-thumb">🧘</div>
+          <div class="workout-info"><h4>Yoga Flow</h4><p>Flexibility · Beginner</p></div>
+        </div>
+        <div class="workout-card">
+          <div class="workout-thumb">🔝</div>
+          <div class="workout-info"><h4>Pull Ups</h4><p>Back · Intermediate</p></div>
+        </div>
+        <div class="workout-card">
+          <div class="workout-thumb">⚡</div>
+          <div class="workout-info"><h4>HIIT Circuit</h4><p>Full body · Advanced</p></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- SCHEDULE PAGE -->
+    <div class="page" id="page-schedule">
+      <div class="page-header">
+        <h1>📅 Schedule</h1>
+        <button class="badge-btn orange">+ Add Session</button>
+      </div>
+      <div class="empty-state">
+        <div class="ico">📅</div>
+        <h3>No Scheduled Sessions</h3>
+        <p>Book sessions with trainers or set workout reminders to see them here.</p>
+      </div>
+    </div>
+
+    <!-- NUTRITION PAGE -->
+    <div class="page" id="page-nutrition">
+      <div class="page-header">
+        <h1>🥗 Nutrition</h1>
+      </div>
+      <div class="meal-input-row">
+        <input type="text" id="mealInput" placeholder="Describe your meal..." onkeydown="if(event.key==='Enter')sendMeal()">
+        <button onclick="sendMeal()">➤</button>
+      </div>
+      <div class="food-chat">
+        <h3>💬 Food Chat</h3>
+        <div class="chat-msgs" id="chatMsgs">
+          <div class="msg bot">
+            <div class="msg-bubble">Hi! Tell me what you're eating and I'll help track the calories. For example: "I'm having a beef burger with fries"</div>
+          </div>
+        </div>
+        <div id="logBtnArea"></div>
+      </div>
+      <div class="meal-plan-header">
+        <div class="left">
+          <h3>🍽 AI Nutrition Plan</h3>
+          <p>1950 cal/day · no restrictions</p>
+        </div>
+        <button class="refresh-btn" onclick="refreshPlan()">🔄</button>
+      </div>
+      <div class="meal-row">
+        <div class="meal-info">
+          <h4>Breakfast</h4>
+          <div class="dish">Scrambled Eggs with Whole-Wheat Toast and Avocado</div>
+          <div class="desc">3 large eggs, 2 slices whole-wheat toast, 1/2 medium avocado...</div>
+        </div>
+        <div class="cal">
+          <div class="num">500 cal</div>
+          <div class="macros">P: 25g · C: 40g · F: 25g</div>
+        </div>
+      </div>
+      <div class="meal-row">
+        <div class="meal-info">
+          <h4>Lunch</h4>
+          <div class="dish">Chicken and Lentil Salad</div>
+          <div class="desc">150g grilled chicken breast, 1 cup cooked lentils, mixed greens (spinach, kale)...</div>
+        </div>
+        <div class="cal">
+          <div class="num">800 cal</div>
+          <div class="macros">P: 50g · C: 70g · F: 35g</div>
+        </div>
+      </div>
+      <div class="meal-row">
+        <div class="meal-info">
+          <h4>Dinner</h4>
+          <div class="dish">Beef Stir-fry with Brown Rice</div>
+          <div class="desc">150g lean beef sirloin, 1 cup cooked brown rice, mixed stir-fry vegetables...</div>
+        </div>
+        <div class="cal">
+          <div class="num">900 cal</div>
+          <div class="macros">P: 60g · C: 80g · F: 40g</div>
+        </div>
+      </div>
+      <div class="ai-tips">
+        <div class="label">AI Tips</div>
+        <p>Focus on a balanced intake of macronutrients to support general fitness and energy levels.</p>
+      </div>
+      <div class="gen-time">Generated just now</div>
+      <div class="filter-tabs" style="margin-top:20px;">
+        <button class="filter-tab active">✨ All</button>
+        <button class="filter-tab">💪 Workouts</button>
+        <button class="filter-tab">🥗 Nutrition</button>
+        <button class="filter-tab">📈 Progress</button>
+        <button class="filter-tab">🛡 Safety</button>
+      </div>
+    </div>
+
+    <!-- AI ASSIST PAGE -->
+    <div class="page" id="page-ai">
+      <div class="ai-assist-header">
+        <div class="left">
+          <h2>✨ AI Assist</h2>
+          <p>Your personal fitness intelligence</p>
+        </div>
+        <button class="badge-btn orange">💬 Ask AI</button>
+      </div>
+      <div class="quick-actions">
+        <div class="qa-card">
+          <div class="ico">🍽</div>
+          <h4>New Meal Plan</h4>
+          <p>Generate personalized nutrition</p>
+        </div>
+        <div class="qa-card">
+          <div class="ico">⏱</div>
+          <h4>Plan History</h4>
+          <p>View past AI recommendations</p>
+        </div>
+        <div class="qa-card">
+          <div class="ico">💪</div>
+          <h4>Workouts</h4>
+          <p>Get a custom workout plan</p>
+        </div>
+        <div class="qa-card" style="border-color:var(--orange); background:rgba(232,83,10,0.06);">
+          <div class="ico">📈</div>
+          <h4>Progress</h4>
+          <p>Track your gains over time</p>
+        </div>
+      </div>
+      <div class="empty-state">
+        <div class="ico">💪</div>
+        <h3>No Active Workout Plan</h3>
+        <p>Ask your trainer to create a workout plan for you, or set a goal to get started.</p>
+      </div>
+      <div class="ai-chat-box">
+        <div class="ai-chat-msgs" id="aiChatMsgs">
+          <div class="msg bot">
+            <div class="msg-bubble">Hello! I'm your AI fitness assistant. Ask me anything about workouts, nutrition, recovery, or your fitness goals! 💪</div>
+          </div>
+        </div>
+        <div class="ai-input-row">
+          <input type="text" id="aiInput" placeholder="Ask your AI trainer anything..." onkeydown="if(event.key==='Enter')sendAI()">
+          <button class="ai-send" onclick="sendAI()">➤</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- SHOP PAGE -->
+    <div class="page" id="page-shop">
+      <div class="shop-search">
+        <span>🔍</span>
+        <input type="text" placeholder="Search equipment, supplements, clothes...">
+      </div>
+      <div class="category-tabs">
+        <div class="cat-tab active"><div class="ico">💪</div><h4>Gym Equipment</h4></div>
+        <div class="cat-tab"><div class="ico">💊</div><h4>Supplements</h4></div>
+        <div class="cat-tab"><div class="ico">👕</div><h4>Gym Clothes</h4></div>
+      </div>
+      <div class="product-grid">
+        <div class="product-card">
+          <div class="product-img">🧪</div>
+          <div class="product-info">
+            <div class="product-cat">Supplements</div>
+            <div class="product-name">Creatine Monohydrate</div>
+            <div class="product-price">1,200 ETB</div>
+            <button class="add-to-cart">Add to Cart</button>
+          </div>
+        </div>
+        <div class="product-card">
+          <div class="product-img">🥊</div>
+          <div class="product-info">
+            <div class="product-cat">Equipment</div>
+            <div class="product-name">Cowhide Gym Gloves</div>
+            <div class="product-price">2,300 ETB</div>
+            <button class="add-to-cart">Add to Cart</button>
+          </div>
+        </div>
+        <div class="product-card">
+          <div class="product-img">🥋</div>
+          <div class="product-info">
+            <div class="product-cat">Clothes</div>
+            <div class="product-name">MMA BJJ Rashguard</div>
+            <div class="product-price">1,500 ETB</div>
+            <button class="add-to-cart">Add to Cart</button>
+          </div>
+        </div>
+        <div class="product-card">
+          <div class="product-img">👕</div>
+          <div class="product-info">
+            <div class="product-cat">Clothes</div>
+            <div class="product-name">Xtep Training Shirt</div>
+            <div class="product-price">3,200 ETB</div>
+            <button class="add-to-cart">Add to Cart</button>
+          </div>
+        </div>
+        <div class="product-card">
+          <div class="product-img">🏋️</div>
+          <div class="product-info">
+            <div class="product-cat">Equipment</div>
+            <div class="product-name">Adjustable Dumbbell</div>
+            <div class="product-price">4,800 ETB</div>
+            <button class="add-to-cart">Add to Cart</button>
+          </div>
+        </div>
+        <div class="product-card">
+          <div class="product-img">🥤</div>
+          <div class="product-info">
+            <div class="product-cat">Supplements</div>
+            <div class="product-name">Whey Protein 2kg</div>
+            <div class="product-price">2,900 ETB</div>
+            <button class="add-to-cart">Add to Cart</button>
+          </div>
+        </div>
+        <div class="product-card">
+          <div class="product-img">🩺</div>
+          <div class="product-info">
+            <div class="product-cat">Supplements</div>
+            <div class="product-name">Multivitamin Pack</div>
+            <div class="product-price">850 ETB</div>
+            <button class="add-to-cart">Add to Cart</button>
+          </div>
+        </div>
+        <div class="product-card">
+          <div class="product-img">🎽</div>
+          <div class="product-info">
+            <div class="product-cat">Clothes</div>
+            <div class="product-name">Pro Compression Shorts</div>
+            <div class="product-price">1,100 ETB</div>
+            <button class="add-to-cart">Add to Cart</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- FEED PAGE -->
+    <div class="page" id="page-feed">
+      <div class="feed-header">
+        <h1 style="font-size:1.35rem; font-weight:700;">🔥 Feed</h1>
+        <button class="badge-btn orange">+ New Post</button>
+      </div>
+      <div class="stories-row">
+        <div class="story">
+          <div class="story-ring add"><div class="story-avatar">＋</div></div>
+          <span class="story-name">Add Story</span>
+        </div>
+        <div class="story">
+          <div class="story-ring"><div class="story-avatar">👤</div></div>
+          <span class="story-name">bakal</span>
+        </div>
+        <div class="story">
+          <div class="story-ring"><div class="story-avatar">🏋️</div></div>
+          <span class="story-name">alex_fit</span>
+        </div>
+        <div class="story">
+          <div class="story-ring"><div class="story-avatar">🔥</div></div>
+          <span class="story-name">marta</span>
+        </div>
+        <div class="story">
+          <div class="story-ring"><div class="story-avatar">💪</div></div>
+          <span class="story-name">coach_b</span>
+        </div>
+      </div>
+      <div class="post-compose">
+        <textarea placeholder="Share your progress..." id="postText"></textarea>
+        <div class="post-compose-footer">
+          <div class="media-hint">
+            <span>🖼 Images &lt;15MB</span>
+            <span>📹 Videos &lt;10MB</span>
+          </div>
+          <button class="post-btn" onclick="submitPost()">Post</button>
+        </div>
+      </div>
+      <div id="feedPosts">
+        <div class="feed-post">
+          <div class="post-meta">
+            <div class="post-avatar">B</div>
+            <div class="info"><h4>bakal teshome</h4><p>4 days ago</p></div>
+          </div>
+          <div class="post-body">Just finished my first week on Pulse Tribe! 🔥 The AI workout plan is unreal. Already feeling stronger. Let's go tribe! 💪</div>
+          <div class="post-actions">
+            <button class="post-action">❤️ 24</button>
+            <button class="post-action">💬 8 Comments</button>
+            <button class="post-action">↗ Share</button>
+          </div>
+        </div>
+        <div class="feed-post">
+          <div class="post-meta">
+            <div class="post-avatar" style="background:#2a5c8a;">A</div>
+            <div class="info"><h4>alex_fitness</h4><p>1 week ago</p></div>
+          </div>
+          <div class="post-body">The nutrition tracking feature is a game changer. I logged my meals with the food chat and it gave me a full macro breakdown in seconds. 🥗</div>
+          <div class="post-actions">
+            <button class="post-action">❤️ 41</button>
+            <button class="post-action">💬 12 Comments</button>
+            <button class="post-action">↗ Share</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- USER PROFILE PAGE -->
+    <div class="page" id="page-userprofile">
+      <div class="profile-header">
+        <div class="profile-avatar">👤</div>
+        <h2 id="profileName">Tribe Member</h2>
+        <p>🔥 Pulse Tribe · Ignite Your Potential</p>
+        <div class="profile-stats">
+          <div class="p-stat"><div class="num">0</div><div class="lbl">Workouts</div></div>
+          <div class="p-stat"><div class="num">0</div><div class="lbl">Streak Days</div></div>
+          <div class="p-stat"><div class="num">0</div><div class="lbl">Following</div></div>
+        </div>
+      </div>
+      <div class="profile-section">
+        <h3>Body Profile</h3>
+        <div class="p-row"><span class="key">⚖️ Weight</span><span class="val" id="pWeight">70 kg</span></div>
+        <div class="p-row"><span class="key">📏 Height</span><span class="val" id="pHeight">175 cm</span></div>
+        <div class="p-row"><span class="key">🗓 Age</span><span class="val" id="pAge">25</span></div>
+        <div class="p-row"><span class="key">👤 Gender</span><span class="val" id="pGender">Male</span></div>
+      </div>
+      <div class="profile-section">
+        <h3>Fitness Goal</h3>
+        <div class="p-row"><span class="key">🎯 Primary Goal</span><span class="val" id="pGoal">Build Muscle</span></div>
+        <div class="p-row"><span class="key">🔥 Membership</span><span class="val">Free Plan</span></div>
+      </div>
+    </div>
+
+    <!-- COMMUNITY PAGE -->
+    <div class="page" id="page-community">
+      <div class="page-header"><h1>👥 Community</h1></div>
+      <div class="empty-state">
+        <div class="ico">👥</div>
+        <h3>Join the Tribe</h3>
+        <p>Connect with trainers and fellow athletes in your city. Community features coming soon!</p>
+      </div>
+    </div>
+
+    <!-- CHAT PAGE -->
+    <div class="page" id="page-chat">
+      <div class="page-header"><h1>💬 Messages</h1></div>
+      <div class="empty-state">
+        <div class="ico">💬</div>
+        <h3>No Messages Yet</h3>
+        <p>Chat with your trainer or community members here.</p>
+      </div>
+    </div>
+
+    <!-- NOTIFICATIONS PAGE -->
+    <div class="page" id="page-notif">
+      <div class="page-header"><h1>🔔 Notifications</h1></div>
+      <div class="empty-state">
+        <div class="ico">🔔</div>
+        <h3>All Caught Up!</h3>
+        <p>No new notifications. Keep grinding! 💪</p>
+      </div>
+    </div>
+
+  </div><!-- end .main -->
+
+  <!-- Bottom branding bar -->
+  <div class="bottom-bar">
+    <span class="fire">🔥</span> <strong>PULSE TRIBE</strong> · Ignite Your Potential
+  </div>
+
+</div><!-- end #app -->
+
+<script src="script.js"></script>
+</body>
+</html>
